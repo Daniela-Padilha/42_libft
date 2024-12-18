@@ -20,13 +20,7 @@
 
 NAME = libft.a
 SRCS_D = .
-FTPRINTF_SRCS_D = Ft_Printf
-GNL_SRCS_D = Get_next_line
 HEADER = $(SRCS_D)/libft.h
-HEADER_FT_PRINTF = $(FTPRINTF_SRCS_D)/ft_printf.h
-HEADER_GNL = $(GNL_SRCS_D)/get_next_line.h
-
-
 
 #source files
 SRC = $(SRCS_D)/ft_isalpha.c \
@@ -74,12 +68,14 @@ BONUS_SRC = $(SRCS_D)/ft_lstnew_bonus.c \
 			$(SRCS_D)/ft_lstiter_bonus.c \
 			$(SRCS_D)/ft_lstmap_bonus.c 
 
-FTPRINTF_SRC = $(FTPRINTF_SRCS_D)/ft_printf.c \
-			$(FTPRINTF_SRCS_D)/ft_printf_utils.c \
-			$(FTPRINTF_SRCS_D)/ft_hex_utils.c
+FTPRINTF_SRC = $(SRCS_D)/ft_printf.c \
+			$(SRCS_D)/ft_printf_utils.c \
+			$(SRCS_D)/ft_hex_utils.c
 
-GNL_SRC = $(GNL_SRCS_D)/get_next_line.c \
-		$(GNL_SRCS_D)/get_next_line_utils.c
+GNL_SRC = $(SRCS_D)/get_next_line.c \
+		$(SRCS_D)/get_next_line_utils.c \
+		$(SRCS_D)/get_next_line_bonus.c \
+		$(SRCS_D)/get_next_line_utils_bonus.c
 
 #object files
 OBJ = $(SRC:.c=.o)
@@ -110,25 +106,14 @@ AR = ar rcs
 all: $(NAME)
 
 #compile the lib
-$(NAME): $(OBJ)
-	$(AR) $(NAME) $(OBJ)
-	@echo "$(BGRN)✨Compilation completed✨"
-
-#compile lib with bonus
-bonus: $(OBJ) $(BONUS_OBJ)
-	$(AR) $(NAME) $(OBJ) $(BONUS_OBJ)
-	@echo "$(BGRN)✨Bonus compilation completed✨"
-
-#compile lib with extra functions
-extra: $(OBJ) $(BONUS_OBJ) $(FTPRINTF_OBJ) $(GNL_OBJ)
+$(NAME): $(OBJ) $(BONUS_OBJ) $(FTPRINTF_OBJ) $(GNL_OBJ)
 	$(AR) $(NAME) $(OBJ) $(BONUS_OBJ) $(FTPRINTF_OBJ) $(GNL_OBJ)
-	@echo "$(BGRN)✨Extra compilation completed✨"
+	@echo "$(BGRN)✨Compilation completed✨"
 
 #compile .o files
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(BMAG)Compiling..."
-
 
 #          ________________________________________________
 # ________|                                               |_______
@@ -139,7 +124,7 @@ extra: $(OBJ) $(BONUS_OBJ) $(FTPRINTF_OBJ) $(GNL_OBJ)
 
 #remove .o
 clean:
-	$(RM) $(OBJ) $(BONUS_OBJ)
+	$(RM) $(OBJ) $(BONUS_OBJ) $(FTPRINTF_OBJ) $(GNL_OBJ)
 	@echo "$(BMAG)✨Objects removed $(BGRN)successfully✨"
 
 
@@ -162,7 +147,6 @@ re: fclean all
 #help
 help:
 	@echo "✳$(BMAG) make  $(BWHI)    -> $(BMAG)compiles the lib"
-	@echo "✳$(BMAG) bonus  $(BWHI)   -> $(BMAG)compiles the lib with bonus"
 
 	@echo "$(BWHI)✳$(BMAG) clean    $(BWHI) -> $(BMAG)removes all objects"
 	@echo "$(BWHI)✳$(BMAG) fclean    $(BWHI)-> $(BMAG)removes all objects plus the program"

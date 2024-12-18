@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddo-carm <ddo-carm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddo-carm <ddo-carm@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:29:24 by ddo-carm          #+#    #+#             */
-/*   Updated: 2024/11/05 17:58:42 by ddo-carm         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:10:46 by ddo-carm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	*ft_free_mem(char **new_s, size_t word)
 		free (new_s[i]);
 		i++;
 	}
-	free (new_s);
+	// free (new_s);
 	return ((void *)new_s);
 }
 

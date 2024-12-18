@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddo-carm <ddo-carm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddo-carm <ddo-carm@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:01:55 by ddo-carm          #+#    #+#             */
-/*   Updated: 2024/11/05 16:05:11 by ddo-carm         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:05:44 by ddo-carm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdarg.h>
+# include <fcntl.h>
 
 typedef struct s_list
 {
@@ -70,5 +72,30 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+// Ft_printf
+int			ft_printf(const char *format, ...);
+int			ft_print_args(va_list args, char letter);
+int			ft_print_char(char c);
+int			ft_print_str(char *str);
+int			ft_print_int(int nbr);
+int			ft_print_unsign(unsigned int i);
+int			ft_print_ptr(unsigned long ptr);
+int			ft_print_hex(unsigned int nbr, int lower);
+
+// GNL
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+char	*get_next_line(int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
+void	*ft_memchr(const void *s, int c, size_t n);
+size_t	ft_strlen_until(const char *s, char c);
+void	*ft_calloc(size_t nmemb, size_t size);
+
+// GNL Bonus
+# define OPEN_MAX 1024
 
 #endif
