@@ -10,10 +10,23 @@
 #                                                                              #
 # **************************************************************************** #
 
+#		   ________________________________________________        
+#  _______|                                               |_______
+# \       |                 NAMES & PATHS                 |      /
+#  \      |                                               |     /
+#  /      |_______________________________________________|     \ 
+# /__________)                                        (__________\ 
+
+
 NAME = libft.a
-CFLAGS = -Wall -Wextra -Werror
-HEADERS = ./libft
 SRCS_D = .
+FTPRINTF_SRCS_D = Ft_Printf
+GNL_SRCS_D = Get_next_line
+HEADER = $(SRCS_D)/libft.h
+HEADER_FT_PRINTF = $(FTPRINTF_SRCS_D)/ft_printf.h
+HEADER_GNL = $(GNL_SRCS_D)/get_next_line.h
+
+
 
 #source files
 SRC = $(SRCS_D)/ft_isalpha.c \
@@ -49,46 +62,140 @@ SRC = $(SRCS_D)/ft_isalpha.c \
 	$(SRCS_D)/ft_putendl_fd.c \
 	$(SRCS_D)/ft_putnbr_fd.c \
 	$(SRCS_D)/ft_strtrim.c \
-	$(SRCS_D)/ft_split.c \
+	$(SRCS_D)/ft_split.c 
 
-BONUS = $(SRCS_D)/ft_lstnew_bonus.c \
-		$(SRCS_D)/ft_lstadd_front_bonus.c \
-		$(SRCS_D)/ft_lstsize_bonus.c \
-		$(SRCS_D)/ft_lstlast_bonus.c \
-		$(SRCS_D)/ft_lstadd_back_bonus.c \
-		$(SRCS_D)/ft_lstdelone_bonus.c \
-		$(SRCS_D)/ft_lstclear_bonus.c \
-		$(SRCS_D)/ft_lstiter_bonus.c \
-		$(SRCS_D)/ft_lstmap_bonus.c 
+BONUS_SRC = $(SRCS_D)/ft_lstnew_bonus.c \
+			$(SRCS_D)/ft_lstadd_front_bonus.c \
+			$(SRCS_D)/ft_lstsize_bonus.c \
+			$(SRCS_D)/ft_lstlast_bonus.c \
+			$(SRCS_D)/ft_lstadd_back_bonus.c \
+			$(SRCS_D)/ft_lstdelone_bonus.c \
+			$(SRCS_D)/ft_lstclear_bonus.c \
+			$(SRCS_D)/ft_lstiter_bonus.c \
+			$(SRCS_D)/ft_lstmap_bonus.c 
+
+FTPRINTF_SRC = $(FTPRINTF_SRCS_D)/ft_printf.c \
+			$(FTPRINTF_SRCS_D)/ft_printf_utils.c \
+			$(FTPRINTF_SRCS_D)/ft_hex_utils.c
+
+GNL_SRC = $(GNL_SRCS_D)/get_next_line.c \
+		$(GNL_SRCS_D)/get_next_line_utils.c
 
 #object files
 OBJ = $(SRC:.c=.o)
-BONUS_OBJ = $(BONUS:.c=.o)
+BONUS_OBJ = $(BONUS_SRC:.c=.o)
+FTPRINTF_OBJ = $(FTPRINF_SRC:.c=.o)
+GNL_OBJ = $(GNL_SRC:.c=.o)
+
+#		   ________________________________________________
+#  _______|                                               |_______
+# \       |                FLAGS & COMMANDS               |      /
+#  \      |                                               |     /
+#  /      |_______________________________________________|     \ 
+# /__________)                                        (__________\ 
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+RM = rm -f
+AR = ar rcs
+
+#          ________________________________________________
+# ________|                                               |_______
+# \       |                    LIB RULES                  |      /
+#  \      |                                               |     /
+#  /      |_______________________________________________|     \ 
+# /__________)                                        (__________\ 
+
 
 all: $(NAME)
 
 #compile the lib
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+	$(AR) $(NAME) $(OBJ)
+	@echo "$(BGRN)✨Compilation completed✨"
 
 #compile lib with bonus
 bonus: $(OBJ) $(BONUS_OBJ)
-	ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
+	$(AR) $(NAME) $(OBJ) $(BONUS_OBJ)
+	@echo "$(BGRN)✨Bonus compilation completed✨"
+
+#compile lib with extra functions
+extra: $(OBJ) $(BONUS_OBJ) $(FTPRINTF_OBJ) $(GNL_OBJ)
+	$(AR) $(NAME) $(OBJ) $(BONUS_OBJ) $(FTPRINTF_OBJ) $(GNL_OBJ)
+	@echo "$(BGRN)✨Extra compilation completed✨"
 
 #compile .o files
-%.o: %.c
-	cc $(CFLAGS) -I $(HEADERS) -c $< -o $@
+%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(BMAG)Compiling..."
+
+
+#          ________________________________________________
+# ________|                                               |_______
+# \       |                  CLEAN RULES                  |      /
+#  \      |                                               |     /
+#  /      |_______________________________________________|     \ 
+# /__________)                                        (__________\ 
 
 #remove .o
 clean:
-	rm -f $(OBJ) $(BONUS_OBJ)
+	$(RM) $(OBJ) $(BONUS_OBJ)
+	@echo "$(BMAG)✨Objects removed $(BGRN)successfully✨"
+
 
 #clean and remove
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
+	@echo "$(BMAG)✨Program removed $(BGRN)successfully✨"
 	
 #remake
 re: fclean all
+	@echo "$(BMAG)✨Re-compile was $(BGRN)successfull✨"
+
+#          ________________________________________________
+# ________|                                               |_______
+# \       |                  HELP RULES                   |      /
+#  \      |                                               |     /
+#  /      |_______________________________________________|     \ 
+# /__________)                                        (__________\ 
+
+#help
+help:
+	@echo "✳$(BMAG) make  $(BWHI)    -> $(BMAG)compiles the lib"
+	@echo "✳$(BMAG) bonus  $(BWHI)   -> $(BMAG)compiles the lib with bonus"
+
+	@echo "$(BWHI)✳$(BMAG) clean    $(BWHI) -> $(BMAG)removes all objects"
+	@echo "$(BWHI)✳$(BMAG) fclean    $(BWHI)-> $(BMAG)removes all objects plus the program"
+	@echo "$(BWHI)✳$(BMAG) re        $(BWHI)-> $(BMAG)removes all objects plus the program and recompiles the lib"
 
 #Phony targets to avoid clashes
 .PHONY: all clean fclean re
+
+#          ________________________________________________
+# ________|                                               |_______
+# \       |                    COLORS                     |      /
+#  \      |                                               |     /
+#  /      |_______________________________________________|     \ 
+# /__________)                                        (__________\ 
+
+#color list for foreground
+#bash -c 'for c in {0..255}; do tput setaf $c; tput setaf $c | cat -v; echo =$c; done'
+
+BLA		:= $(echo "u001b[30m")
+RED		:= $(echo "\u001b[31m")
+GRN		:= $(echo "\u001b[32m")
+YEL		:= $(echo "\u001b[33m")
+BLU		:= $(echo "\u001b[34m")
+MAG		:= $(echo "\u001b[35m")
+CYA		:= $(echo "\u001b[36m")
+WHI		:= $(echo "\u001b[37m")
+GRE		:= $(echo "\u001b[0m")
+BBLA	:= $(echo "\u001b[30;1m")
+BRED 	:= $(echo "\u001b[31;1m")
+BGRN	:= $(echo "\u001b[32;1m")
+BYEL	:= $(echo "\u001b[33;1m")
+BBLU	:= $(echo "\u001b[34;1m")
+BMAG	:= $(echo "\u001b[35;1m")
+BCYA	:= $(echo "\u001b[36;1m")
+BWHI	:= $(echo "\u001b[37;1m")
+Reset	:= $(echo "\u001b[0m")
