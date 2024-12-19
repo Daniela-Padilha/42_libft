@@ -51,8 +51,8 @@ static void	*ft_free_mem(char **new_s, size_t word)
 		free (new_s[i]);
 		i++;
 	}
-	// free (new_s);
-	return ((void *)new_s);
+	free (new_s);
+	return ;
 }
 
 static char	**ft_createsubs(char **new_s, char const *s, char c, size_t n_words)
