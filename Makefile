@@ -80,7 +80,7 @@ GNL_SRC = $(SRCS_D)/get_next_line.c \
 #object files
 OBJ = $(SRC:.c=.o)
 BONUS_OBJ = $(BONUS_SRC:.c=.o)
-FTPRINTF_OBJ = $(FTPRINF_SRC:.c=.o)
+FTPRINTF_OBJ = $(FTPRINTF_SRC:.c=.o)
 GNL_OBJ = $(GNL_SRC:.c=.o)
 
 #		   ________________________________________________
