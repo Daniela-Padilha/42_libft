@@ -6,4 +6,4 @@ New functions will be added throughout the completion of the course.
 
 ## The Norm
 
-This project is written in accordance to the 42 School's "The Norm" (_Version 4_). To review the Norm, [click here](https://github.com/42School/norminette/blob/master/pdf/en.norm.pdf).
+This project is written in accordance to the 42 School's ["The Norm"](https://github.com/42School/norminette/blob/master/pdf/en.norm.pdf) (_Version 4_).
