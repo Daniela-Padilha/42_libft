@@ -56,7 +56,7 @@ SRC = $(SRCS_D)/ft_isalpha.c \
 	$(SRCS_D)/ft_putendl_fd.c \
 	$(SRCS_D)/ft_putnbr_fd.c \
 	$(SRCS_D)/ft_strtrim.c \
-	$(SRCS_D)/ft_split.c 
+	$(SRCS_D)/ft_split.c \
 
 BONUS_SRC = $(SRCS_D)/ft_lstnew_bonus.c \
 			$(SRCS_D)/ft_lstadd_front_bonus.c \
