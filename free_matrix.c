@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddo-carm <ddo-carm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 12:01:36 by ddo-carm          #+#    #+#             */
-/*   Updated: 2024/11/02 16:21:35 by ddo-carm         ###   ########.fr       */
+/*   Created: 2025/01/30 14:37:35 by ddo-carm          #+#    #+#             */
+/*   Updated: 2025/01/30 14:49:56 by ddo-carm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//info   --> Show the lenght of the str
-//s      --> Pointer to the str
-//return --> Success (lenght)
+//info    --> Free a 3D array
 
-size_t	ft_strlen(const char *s)
+void	free_matrix(void ***matrix)
 {
-	size_t	i;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (s[i] != '\0')
+	if (!matrix || !*matrix)
+		return ;
+	while (matrix[i])
 	{
-		i++;
+		j = 0;
+		while (matrix[i][j])
+			free(matrix[i][j++]);
+		free(matrix[i++]);
 	}
-	return (i);
+	free(*matrix);
+	return ;
 }
-
-// #include <string.h>
-
-//  int     main(int ac, char **av)
-// {
-// 	if (ac > 1)
-// 	{
-// 		printf("ft_strlen: %zu\n", ft_strlen(av[1]));
-// 		printf("strlen: %zu", strlen(av[1]));
-// 	}
-//     return (0);
-// }
