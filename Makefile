@@ -40,7 +40,8 @@ SRCS = $(addprefix $(BASIC_PATH)/, ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 		ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c)
 
 EXT_SRCS = $(addprefix $(EXT_PATH)/, free_arrays.c free_matrix.c errors.c \
-			close_pipe.c ft_atoi_base.c ft_is_space.c ft_atol.c)
+			close_pipe.c ft_atoi_base.c ft_is_space.c ft_atol.c \
+			ft_is_directory.c )
 
 PRINTF_SRCS = $(addprefix $(PRINTF_PATH)/, ft_printf.c ft_printf_utils.c \
 			ft_hex_utils.c)
