@@ -22,6 +22,6 @@ void	free_matrix(void ***matrix);
 int		ft_atoi_base(const char *str, int base);
 long	ft_atol(const char *nptr);
 int		ft_is_space(char c);
-int	  ft_is_directory(const char *path);
+int		ft_is_directory(const char *path);
 
 #endif
